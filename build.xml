@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="curl" default="build" basedir="./">
+
+    <property environment="env"/>
+
+    <target name="clean">
+        <delete dir="vendor"/>
+        <delete dir="build/logs"/>
+        <delete dir="build/coverage"/>
+        <mkdir dir="build/logs"/>
+        <mkdir dir="build/coverage"/>
+    </target>
+
+    <target name="vendors" description="Install vendors">
+        <exec executable="composer" failonerror="true">
+            <arg value="install"/>
+        </exec>
+    </target>
+
+    <target name="phpunit">
+        <echo message="Dir is ${basedir}"/>
+        <exec executable="phpunit" failonerror="true">
+            <arg value="--configuration=phpunit.xml"/>
+            <arg value="--log-junit=build/logs/log.xml"/>
+            <arg value="--coverage-clover=build/coverage/coverage.xml"/>
+            <arg value="-v"/>
+        </exec>
+    </target>
+
+    <target name="build" depends="clean,vendors,phpunit"/>
+</project>
