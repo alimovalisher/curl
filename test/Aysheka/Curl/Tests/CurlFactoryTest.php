@@ -19,9 +19,10 @@ class CurlFactoryTest extends \PHPUnit_Framework_TestCase
      */
     function getAndExecute()
     {
-        $curl = new CurlFactory(new Logger('curl'));
+        $curlFactory = new CurlFactory(new Logger('curl'));
 
-        $curl = $curl->get();
+        $curl = $curlFactory->get();
+
         $curl->open('google.ru');
 
         $response = $curl->execute();

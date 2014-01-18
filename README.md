@@ -8,9 +8,10 @@ Example
 
 ~~~~~ php
 
-$curl = new CurlFactory(new Logger('curl'));
+$curlFactory = new CurlFactory(new Logger('curl'));
 
-$curl = $curl->get();
+$curl = $curlFactory->get();
+
 $curl->open('google.ru');
 
 $response = $curl->execute();
